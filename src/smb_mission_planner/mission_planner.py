@@ -18,9 +18,7 @@ class MissionPlan():
         state_machine = smach.StateMachine(outcomes=['Success', 'Failure'])
         with state_machine:
             smach.StateMachine.add('Waypoint Mission', FARWaypointMission(self.missions_data['waypoint_mission'], self.reference_frame),
-                                   transitions={'Completed': 'Twist Mission', 'Aborted': 'Failure', 'Next Waypoint': 'Waypoint Mission'})
-            smach.StateMachine.add('Twist Mission', TwistMission(self.missions_data['twist_mission'], self.reference_frame),
-                                   transitions={'Completed': 'Success', 'Aborted': 'Failure', 'Next Twist': 'Twist Mission'})
+                                   transitions={'Completed': 'Success', 'Aborted': 'Failure', 'Next Waypoint': 'Waypoint Mission'})
         return state_machine
 
 class MissionPlanner():
